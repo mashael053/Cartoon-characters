@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick and Morty Characters</title>
+</head>
+<body>
+  <style>
+    .title{
+        text-align: center;
+        color: black;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .characters-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+
+    .character {
+      width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 800px) {
+      .characters-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+    <h1 class="title">Rick and Morty Characters</h1>
+  <div id="characters" class="characters-container"></div>
+
+  <script>
+    fetch('https://rickandmortyapi.com/api/character')
+      .then(response => response.json())
+      .then(data => {
+        const characters = data.results;
+
+        const charactersDiv = document.getElementById('characters');
+
+        characters.forEach(character => {
+          const name = character.name;
+          const image = character.image;
+
+          const characterDiv = document.createElement('div');
+          characterDiv.classList.add('character');
+          characterDiv.innerHTML = `
+            <h3>Name: ${name}</h3>
+            <img src="${image}" alt="${name}">
+            <hr>
+          `;
+
+          charactersDiv.appendChild(characterDiv);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+  </script>
+</body>
+</html>
