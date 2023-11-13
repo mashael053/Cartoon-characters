@@ -28,6 +28,12 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    @media (max-width: 576px) {
+      .characters-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -58,6 +64,7 @@
         });
       })
       .catch(error => console.error('Error:', error));
+      
   </script>
 </body>
 </html>
